@@ -6,7 +6,8 @@ data class GameState(val boardSize: Int, val moves: List<Move> = emptyList()) {
 
     override fun toString(): String {
         val board = getBoard()
-        var result = ""
+        var result = "\n"
+
         for (i in 0..board.lastIndex) {
             for (j in 0..board.get(i).lastIndex) {
                 result += "${board[i][j]}"

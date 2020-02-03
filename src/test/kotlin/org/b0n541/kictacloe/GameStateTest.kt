@@ -6,12 +6,12 @@ import org.junit.Test
 
 class GameStateTest {
     @Test
-    fun newGameState() {
+    fun newGame() {
         assertThat(GameState(3).moves).hasSize(0)
     }
 
     @Test
-    fun newGameStatePlusFirstMove() {
+    fun newGamePlusFirstMove() {
 
         assertThat(GameState(3, listOf(Move.from("X,0,0"))).moves).hasSize(1)
 
@@ -20,12 +20,45 @@ class GameStateTest {
     }
 
     @Test
-    fun newGameStatePlusMultipleMoves() {
+    fun newGamePlusMultipleMoves() {
         val gameState = GameState(3) +
                 Move.from("X,0,0") +
                 Move.from("O,1,1") +
                 Move.from("X,2,2")
 
         assertThat(gameState.moves).hasSize(3)
+    }
+
+    @Test
+    fun newGameToString() {
+        assertThat(GameState(3).toString()).isEqualTo(
+                """
+                    
+                     | | 
+                    -+-+-
+                     | | 
+                    -+-+-
+                     | | 
+
+                """.trimIndent())
+    }
+
+    @Test
+    fun newGamePlusMultipleMovesToString() {
+        val gameState = GameState(3) +
+                Move.from("X,0,0") +
+                Move.from("O,1,1") +
+                Move.from("X,2,2")
+
+        assertThat(gameState.toString()).isEqualTo(
+                """
+                    
+                    X| | 
+                    -+-+-
+                     |O| 
+                    -+-+-
+                     | |X
+
+                """.trimIndent())
     }
 }
