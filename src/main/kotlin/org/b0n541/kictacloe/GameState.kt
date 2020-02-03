@@ -5,12 +5,12 @@ data class GameState(val boardSize: Int, val moves: List<Move> = emptyList()) {
     operator fun plus(move: Move): GameState = GameState(boardSize, moves + move)
 
     override fun toString(): String {
-        val board = getBoard()
+        val board = getBoardStateFromMoves()
         var result = "\n"
 
         for (i in 0..board.lastIndex) {
             for (j in 0..board.get(i).lastIndex) {
-                result += "${board[i][j]}"
+                result += board[i][j]
                 if (j < 2) result += "|"
             }
             result += "\n"
@@ -20,7 +20,7 @@ data class GameState(val boardSize: Int, val moves: List<Move> = emptyList()) {
         return result
     }
 
-    private fun getBoard(): Array<Array<String>> {
+    private fun getBoardStateFromMoves(): Array<Array<String>> {
         val result = Array(boardSize) { Array(boardSize) { " " } }
         moves.forEach { result[it.field.x][it.field.y] = it.player.toString() }
         return result
