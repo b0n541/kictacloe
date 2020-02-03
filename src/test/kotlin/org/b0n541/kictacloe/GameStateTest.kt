@@ -1,8 +1,8 @@
 package org.b0n541.kictacloe
 
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.Test
-
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Test
 
 class GameStateTest {
     @Test
@@ -13,20 +13,27 @@ class GameStateTest {
     @Test
     fun newGamePlusFirstMove() {
 
-        assertThat(GameState(3, listOf(Move.from("X,0,0"))).moves).hasSize(1)
+        assertThat(GameState(3, listOf(Move.from("X:0:0"))).moves).hasSize(1)
 
-        val gameState = GameState(3) + Move.from("X,0,0")
+        val gameState = GameState(3) + Move.from("X:0:0")
         assertThat(gameState.moves).hasSize(1)
     }
 
     @Test
     fun newGamePlusMultipleMoves() {
         val gameState = GameState(3) +
-                Move.from("X,0,0") +
-                Move.from("O,1,1") +
-                Move.from("X,2,2")
+                Move.from("X:0:0") +
+                Move.from("O:1:1") +
+                Move.from("X:2:2")
 
         assertThat(gameState.moves).hasSize(3)
+    }
+
+    @Test
+    fun newGamePlusInvalidMove() {
+        assertThrows(IllegalStateException::class.java, { GameState(3) + Move.from("X:3:0") })
+        assertThrows(IllegalStateException::class.java, { GameState(3) + Move.from("O:0:3") })
+//        assertThrows(IllegalStateException::class.java, { GameState(3, listOf(Move.from("X:3:3"))) })
     }
 
     @Test
@@ -38,17 +45,16 @@ class GameStateTest {
                     -+-+-
                      | | 
                     -+-+-
-                     | | 
-
+                     | |  -> DRAW
                 """.trimIndent())
     }
 
     @Test
     fun newGamePlusMultipleMovesToString() {
         val gameState = GameState(3) +
-                Move.from("X,0,0") +
-                Move.from("O,1,1") +
-                Move.from("X,2,2")
+                Move.from("X:0:0") +
+                Move.from("O:1:1") +
+                Move.from("X:2:2")
 
         assertThat(gameState.toString()).isEqualTo(
                 """
@@ -57,8 +63,7 @@ class GameStateTest {
                     -+-+-
                      |O| 
                     -+-+-
-                     | |X
-
+                     | |X -> DRAW
                 """.trimIndent())
     }
 }

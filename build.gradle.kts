@@ -31,10 +31,18 @@ dependencies {
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
 
+    testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
+
     testImplementation("org.assertj:assertj-core:3.11.1")
 }
 
 application {
     // Define the main class for the application.
     mainClassName = "org.b0n541.kictacloe.AppKt"
+}
+
+tasks {
+    test {
+        useJUnitPlatform()
+    }
 }

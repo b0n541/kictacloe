@@ -4,7 +4,7 @@
 package org.b0n541.kictacloe
 
 fun main(args: Array<String>) {
-    
+
     println("Welcome to Kic Tac Loe\n")
 
     val gameState = GameState(3)
