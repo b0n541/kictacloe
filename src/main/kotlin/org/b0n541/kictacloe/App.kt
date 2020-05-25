@@ -11,7 +11,7 @@ fun main(args: Array<String>) {
 
     println(gameState)
 
-    val gameState2 = gameState + Move.from("X,0,0")
+    val gameState2 = gameState + Move.from("X:0:0")
 
     println(gameState2)
 }
