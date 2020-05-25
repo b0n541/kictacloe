@@ -31,10 +31,9 @@ class GameStateTest {
 
     @Test
     fun newGamePlusInvalidMove() {
-        assertThrows(IllegalStateException::class.java, { GameState(3) + Move.from("X:3:0") })
-        assertThrows(IllegalStateException::class.java, { GameState(3) + Move.from("O:0:3") })
-        assertThrows(IllegalStateException::class.java, { GameState(3) + Move.from("Z:0:0") })
-//        assertThrows(IllegalStateException::class.java, { GameState(3, listOf(Move.from("X:3:3"))) })
+        assertThrows(IllegalStateException::class.java) { GameState(3) + Move.from("X:3:0") }
+        assertThrows(IllegalStateException::class.java) { GameState(3) + Move.from("O:0:3") }
+        assertThrows(IllegalStateException::class.java) { GameState(3) + Move.from("Z:0:0") }
     }
 
     @Test
