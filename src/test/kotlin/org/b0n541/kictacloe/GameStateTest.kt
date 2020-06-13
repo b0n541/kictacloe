@@ -13,7 +13,12 @@ class GameStateTest {
     @Test
     fun newGamePlusFirstMove() {
 
-        assertThat(GameState(3, listOf(Move.from("X:0:0"))).moves).hasSize(1)
+        assertThat(
+            GameState(
+                3,
+                listOf(Move.from("X:0:0"))
+            ).moves
+        ).hasSize(1)
 
         val gameState = GameState(3) + Move.from("X:0:0")
         assertThat(gameState.moves).hasSize(1)
@@ -39,14 +44,15 @@ class GameStateTest {
     @Test
     fun newGameToString() {
         assertThat(GameState(3).toString()).isEqualTo(
-                """
+            """
                     
                      | | 
                     -+-+-
                      | | 
                     -+-+-
                      | |  -> DRAW
-                """.trimIndent())
+                """.trimIndent()
+        )
     }
 
     @Test
@@ -57,13 +63,14 @@ class GameStateTest {
                 Move.from("X:2:2")
 
         assertThat(gameState.toString()).isEqualTo(
-                """
+            """
                     
                     X| | 
                     -+-+-
                      |O| 
                     -+-+-
                      | |X -> DRAW
-                """.trimIndent())
+                """.trimIndent()
+        )
     }
 }
